@@ -1,7 +1,5 @@
-# dsa_math.py
 import random
 
-# Быстрое возведение в степень по модулю
 def mod_pow(base, exponent, modulus):
     result = 1
     base %= modulus
@@ -12,7 +10,6 @@ def mod_pow(base, exponent, modulus):
         exponent //= 2
     return result
 
-# Тест Ферма для проверки простоты
 def is_prime(n, k=5):
     if n <= 1:
         return False
@@ -24,7 +21,6 @@ def is_prime(n, k=5):
             return False
     return True
 
-# Расширенный алгоритм Евклида
 def extended_gcd(a, b):
     if b == 0:
         return (a, 1, 0)
@@ -32,7 +28,6 @@ def extended_gcd(a, b):
         g, y, x = extended_gcd(b, a % b)
         return (g, x, y - (a // b) * x)
 
-# Мультипликативная обратная по модулю
 def mod_inverse(a, modulus):
     g, x, _ = extended_gcd(a, modulus)
     if g != 1:
@@ -40,7 +35,6 @@ def mod_inverse(a, modulus):
     else:
         return x % modulus
 
-# Генерация большого простого числа заданной длины в битах
 def generate_large_prime(bits):
     while True:
         candidate = random.getrandbits(bits)
@@ -48,7 +42,6 @@ def generate_large_prime(bits):
         if is_prime(candidate):
             return candidate
 
-# Нахождение первообразного корня
 def find_primitive_root(p):
     if p == 2:
         return 1
@@ -64,7 +57,6 @@ def find_primitive_root(p):
             return g
     raise Exception('Primitive root not found')
 
-# Вспомогательная функция для поиска простых множителей
 def prime_factors(n):
     factors = set()
     while n % 2 == 0:

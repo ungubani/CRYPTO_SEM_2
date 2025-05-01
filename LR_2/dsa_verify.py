@@ -1,6 +1,5 @@
-# dsa_verify.py
 from dsa_math import mod_inverse, mod_pow
-import md5  # ваш модуль хеширования!
+import md5
 
 def load_public_key(filename="public_key.txt"):
     with open(filename, 'r') as f:
@@ -17,10 +16,10 @@ def load_signature(filename="signature.txt"):
     return r, s
 
 def hash_message(message_bytes):
-    message_string = message_bytes.decode('utf-8')  # ПЕРЕВОДИМ байты в строку
-    hash_hex = md5.md5(message_string)  # md5 возвращает hex строку
-    hash_bytes = bytes.fromhex(hash_hex)  # ПЕРЕВОДИМ hex в байты
-    return int.from_bytes(hash_bytes, byteorder='big')  # Наконец, преобразуем в int
+    message_string = message_bytes.decode('utf-8')
+    hash_hex = md5.md5(message_string)
+    hash_bytes = bytes.fromhex(hash_hex)
+    return int.from_bytes(hash_bytes, byteorder='big')
 
 def verify_signature(message_filename, signature_filename="signature.txt", public_key_filename="public_key.txt"):
     p, q, g, y = load_public_key(public_key_filename)
@@ -54,6 +53,6 @@ def verify_signature(message_filename, signature_filename="signature.txt", publi
         return False
 
 if __name__ == "__main__":
-    print("=== DSA Проверка подписи ===")
+    print("DSA Проверка подписи")
     message_filename = input("Введите имя файла сообщения: ").strip()
     verify_signature(message_filename)

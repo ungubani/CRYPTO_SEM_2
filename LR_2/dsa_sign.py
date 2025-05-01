@@ -11,10 +11,10 @@ def load_private_key(filename="private_key.txt"):
     return p, q, g, x
 
 def hash_message(message_bytes):
-    message_string = message_bytes.decode('utf-8')  # ПЕРЕВОДИМ байты в строку
-    hash_hex = md5.md5(message_string)  # md5 возвращает hex строку
-    hash_bytes = bytes.fromhex(hash_hex)  # ПЕРЕВОДИМ hex в байты
-    return int.from_bytes(hash_bytes, byteorder='big')  # Наконец, преобразуем в int
+    message_string = message_bytes.decode('utf-8')
+    hash_hex = md5.md5(message_string)
+    hash_bytes = bytes.fromhex(hash_hex)
+    return int.from_bytes(hash_bytes, byteorder='big')
 
 def sign_message(message_filename, signature_filename="signature.txt", private_key_filename="private_key.txt"):
     p, q, g, x = load_private_key(private_key_filename)
@@ -41,10 +41,10 @@ def sign_message(message_filename, signature_filename="signature.txt", private_k
     with open(signature_filename, 'w') as f:
         f.write(f"{r}\n{s}\n")
 
-    print(f"[+] Сообщение '{message_filename}' подписано!")
+    print(f"[+] Сообщение '{message_filename}' подписано")
     print(f"[+] Подпись сохранена в '{signature_filename}'.")
 
 if __name__ == "__main__":
-    print("=== DSA Постановка подписи ===")
+    print("DSA Постановка подписи")
     message_filename = input("Введите имя файла сообщения: ").strip()
     sign_message(message_filename)
