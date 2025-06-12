@@ -1,24 +1,12 @@
 import random
 from dsa_math import generate_p_and_q
-import md5
 
 
-def get_seed_from_password(password):
-    hashed = md5.md5(password.encode())
-    return int.from_bytes(hashed, byteorder='big')
-
-
-def generate_keys(bits=1024, password=None):
-    if password:
-        seed = get_seed_from_password(password)
-        random.seed(seed)
-    else:
-        random.seed()
-
-    print("[*] Генерация p и q")
+def generate_keys(bits=1024):
+    print("Генерация p и q")
     p, q = generate_p_and_q()
 
-    print("[*] Поиск g...")
+    print("Поиск g")
     h = 2
     while True:
         g = pow(h, (p - 1) // q, p)
@@ -26,10 +14,10 @@ def generate_keys(bits=1024, password=None):
             break
         h += 1
 
-    print("[*] Генерация x (закрытого ключа)...")
+    print("Генерация x (закрытого ключа)")
     x = random.randint(1, q - 1)
 
-    print("[*] Генерация y (открытого ключа)...")
+    print("Генерация y (открытого ключа)")
     y = pow(g, x, p)
 
     return {
@@ -50,13 +38,9 @@ def save_keys(keys, private_filename="private_key.txt", public_filename="public_
 
 
 if __name__ == "__main__":
-    print("=== DSA Генерация ключей ===")
-    mode = input("Сгенерировать ключи по паролю? (yes/no): ").strip().lower()
-    if mode == 'yes':
-        password = input("Введите пароль: ").strip()
-        keys = generate_keys(1024, password)
-    else:
-        keys = generate_keys(1024)
+    print("DSA Генерация ключей")
+
+    keys = generate_keys(1024)
 
     save_keys(keys)
-    print("[+] Ключи успешно сгенерированы")
+    print("Ключи успешно сгенерированы")

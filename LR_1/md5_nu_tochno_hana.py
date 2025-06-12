@@ -93,6 +93,7 @@ def compute_md5_hash(string: str) -> str:
 
 
 def num_to_base(number: int, base: int, length: int) -> list:
+    # Функция для ДОП задания
     represent = []
     while number != 0:
         represent.append(number % base)
@@ -105,6 +106,7 @@ def num_to_base(number: int, base: int, length: int) -> list:
 
 
 def forming_password(number, length, alphabet):
+    # Функция для ДОП задания
     indexes = num_to_base(number, len(alphabet), length)
 
     password = "".join([alphabet[i] for i in indexes])
@@ -113,6 +115,7 @@ def forming_password(number, length, alphabet):
 
 
 def brute_force(source_hash: str, length_pass: int, alphabet: list) -> float:
+    # Функция для ДОП задания
     start = time.time()
 
     for i in range(length_pass ** len(alphabet)):
@@ -128,12 +131,25 @@ def brute_force(source_hash: str, length_pass: int, alphabet: list) -> float:
 
 
 if __name__ == "__main__":
-    # data_string = "BILIBERDA INCOMPORATED"
-    # # data_string = ""
-    #
-    # print(f"SOURCE STRING: '{data_string}'")
-    # print(f"HANDS: {compute_md5_hash(data_string)}")
-    # print(f"LIBRARY: {md5_library.lib_md5(data_string)}")
+    #-----------------
+    # ОСНОВНОЕ ЗАДАНИЕ
+    #-----------------
+
+    data_string = "BILIBERDA INCOMPORATED"
+
+    print(f"SOURCE STRING №1: '{data_string}'")
+    print(f"HANDS: {compute_md5_hash(data_string)}")
+    print(f"LIBRARY: {md5_library.lib_md5(data_string)}")
+
+
+    empty_string = ""
+    print(f"SOURCE STRING №2: '{empty_string}'")
+    print(f"HANDS: {compute_md5_hash(empty_string)}")
+    print(f"LIBRARY: {md5_library.lib_md5(empty_string)}")
+
+    #-----------------------
+    # ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ
+    #-----------------------
 
     alphabet = "abekpsw123"
     source_pass = 'weakp'

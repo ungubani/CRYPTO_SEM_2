@@ -23,7 +23,7 @@ def sign_message(message_filename, signature_filename="signature.txt", private_k
         message = f.read()
 
     h = hash_message(message)
-
+    k = None
     while True:
         k = random.randint(1, q-1)
         try:
@@ -35,16 +35,23 @@ def sign_message(message_filename, signature_filename="signature.txt", private_k
             if s == 0:
                 continue
             break
+        except FileNotFoundError:
+            print("FILE NOT FOUND!")
+            return
         except Exception:
             continue
+    file = open("opened_k.txt", "w")
+    file.write(str(k))
+    file.close()
 
     with open(signature_filename, 'w') as f:
         f.write(f"{r}\n{s}\n")
 
-    print(f"[+] Сообщение '{message_filename}' подписано")
-    print(f"[+] Подпись сохранена в '{signature_filename}'.")
+    print(f"Сообщение '{message_filename}' подписано")
+    print(f"Подпись сохранена в '{signature_filename}'.")
 
 if __name__ == "__main__":
     print("DSA Постановка подписи")
     message_filename = input("Введите имя файла сообщения: ").strip()
+    print("Начинается процесс подписи")
     sign_message(message_filename)

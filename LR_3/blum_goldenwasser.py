@@ -1,6 +1,5 @@
 import random
 from LR_2.dsa_math import is_prime
-from LR_2.dsa_math import extended_gcd
 from LR_2.dsa_math import mod_inverse
 from LR_2.dsa_math import mod_pow
 
@@ -66,20 +65,24 @@ def bits_to_str(bits):
     bytes_list = [bits[i:i+8] for i in range(0, len(bits), 8)]
     return ''.join(chr(int(''.join(str(b) for b in byte), 2)) for byte in bytes_list)
 
+
 if __name__ == "__main__":
+    #---------------------------
+    #НЕ СОВСЕМ ВЕРНО, см BGW_BBS
+    #---------------------------
     message = "KukuTebePrivet"
     message_bits = str_to_bits(message)
-    print(f"m= {message_bits}")
-    print("Генерация ключей...")
+
+    print("> Генерация ключей <")
     n, p, q = generate_keys(bits=64)
 
-    print("Шифрование...")
+    print("> Шифрование <")
     c, x_t, _ = encrypt(message_bits, n)
 
-    print(f"c= {c}")
+    print(f"\nc= {bits_to_str(c)}")
 
 
-    print("Расшифровка...")
+    print("\n> Расшифровка <")
     recovered_bits = decrypt(c, x_t, p, q)
     recovered_message = bits_to_str(recovered_bits)
 

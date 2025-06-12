@@ -26,7 +26,7 @@ def verify_signature(message_filename, signature_filename="signature.txt", publi
     r, s = load_signature(signature_filename)
 
     if not (0 < r < q and 0 < s < q):
-        print("[-] Подпись недействительна: r или s вне допустимого диапазона.")
+        print("Подпись недействительна: r или s вне допустимого диапазона.")
         return False
 
     with open(message_filename, 'rb') as f:
@@ -37,7 +37,7 @@ def verify_signature(message_filename, signature_filename="signature.txt", publi
     try:
         w = mod_inverse(s, q)
     except Exception:
-        print("[-] Не удалось найти обратный элемент для s.")
+        print("Не удалось найти обратный элемент для s.")
         return False
 
     u1 = (h * w) % q
@@ -46,10 +46,10 @@ def verify_signature(message_filename, signature_filename="signature.txt", publi
     v = ((mod_pow(g, u1, p) * mod_pow(y, u2, p)) % p) % q
 
     if v == r:
-        print("[+] Подпись действительна.")
+        print("Подпись действительна.")
         return True
     else:
-        print("[-] Подпись недействительна.")
+        print("Подпись недействительна.")
         return False
 
 if __name__ == "__main__":
