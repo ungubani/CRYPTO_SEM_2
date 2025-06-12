@@ -1,0 +1,8 @@
+> dsa_keygen.py
+>> keys_public.txt (p, q, g, y)
+>> keys_private.txt (p, q, g, x)
+
+> dsa_sign.py
+signature.txt (r, s)
+
+> dsa_verify.py
